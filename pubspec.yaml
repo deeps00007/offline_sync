@@ -1,6 +1,6 @@
 name: flutter_offline_sync
-homepage: https://github.com/deeps00007/offline_sync
-repository: https://github.com/deeps00007/offline_sync
+homepage: https://github.com/deeps00007/flutter_offline_sync
+repository: https://github.com/deeps00007/flutter_offline_sync
 
 description: "A Flutter package that provides offline-first HTTP request handling with automatic synchronization when internet connectivity is restored. Requests are safely stored in SQLite and retried with configurable limits."
 version: 1.0.0
