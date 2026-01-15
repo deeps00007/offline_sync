@@ -14,6 +14,7 @@
 
 - **📡 Offline-First Architecture**: Seamlessly handle HTTP requests regardless of network status.
 - **🧾 Persistent Queue**: Requests are safely stored in a local SQLite database, surviving app restarts.
+- 🧹 Automatic cleanup of failed requests after retry limit is exceeded
 - **🔁 Intelligent Retry**: Configurable retry mechanisms with maximum retry limits for failed sync attempts.
 - **🌐 Auto-Synchronization**: Automatically detects network restoration and processes the queue.
 - **⏳ FIFO Processing**: Maintains the order of operations with First-In-First-Out processing.
@@ -49,7 +50,7 @@ import 'package:flutter/material.dart';
 import 'package:sync_offline_requests/sync_offline_requests.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+
   
   // Initialize the offline sync engine
   OfflineSync.initialize();
@@ -91,6 +92,15 @@ try {
 4.  **Sync**: When a connection is re-established, the queue is processed.
 5.  **Retry Logic**: Failed sync attempts are retried up to a configurable limit before being discarded to prevent infinite loops.
 
+### Retry & Cleanup Strategy
+
+- Each request has a retry counter
+- Failed sync attempts increment the retry count
+- Once the retry limit is exceeded:
+  - The request is marked as failed
+  - It can be safely removed using `clearFailedOnly()`
+  - This prevents infinite retry loops and battery drain
+
 ---
 
 ## 🔧 Advanced Usage
@@ -111,6 +121,21 @@ Get the current count of requests waiting in the queue.
 final int pendingCount = await OfflineSync.pendingCount();
 print('Pending requests: $pendingCount');
 ```
+
+## 🧹 Failed Request Cleanup
+
+To prevent infinite retries and database growth, requests that exceed the
+maximum retry limit are considered **failed**.
+
+You can manually remove such requests using:
+
+```dart
+final removedCount = await OfflineSync.clearFailedOnly();
+print('Removed $removedCount failed requests');
+```
+
+This helps keep local storage clean and avoids unnecessary sync attempts.
+
 
 ---
 

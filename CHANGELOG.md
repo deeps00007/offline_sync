@@ -1,3 +1,7 @@
+## 1.0.5
+- Improved documentation with failed request cleanup features
+- Added usage examples for clearing failed requests
+
 ## 1.0.4
 - Fixed README.md formatting and emoji encoding
 - Improved code examples in documentation
