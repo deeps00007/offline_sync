@@ -49,11 +49,7 @@ import 'package:flutter/material.dart';
 import 'package:sync_offline_requests/sync_offline_requests.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize the offline sync engine
   OfflineSync.initialize();
-  
   runApp(const MyApp());
 }
 ```
