@@ -1,3 +1,6 @@
+## 1.0.1
+- Improved documentation and package metadata
+
 ## 1.0.0
 
 - Initial stable release
